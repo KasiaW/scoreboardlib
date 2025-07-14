@@ -17,7 +17,7 @@ public class ScoreBoard {
     }
 
     public void updateScores(String homeTeam, String awayTeam, int homeScore, int awayScore) {
-        matches.computeIfPresent(MatchUtils.getKey(homeTeam, awayTeam), (key, match) -> {
+        matches.computeIfPresent(MatchUtils.getKey(homeTeam, awayTeam), (_, match) -> {
             match.updateScores(homeScore, awayScore);
             return match;
         });
