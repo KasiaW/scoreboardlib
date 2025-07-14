@@ -13,4 +13,12 @@ public class MatchTest {
 
         assertEquals("Mexico 0 - Canada 5", match.toString());
     }
+
+    @Test
+    void getsTotal() {
+        var match = new Match("Mexico", "Canada");
+        match.updateScores(3, 5);
+
+        assertEquals(8, match.getTotal());
+    }
 }

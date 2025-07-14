@@ -16,8 +16,8 @@ class MatchUtilsTest {
             "bRAZil, '', BRAZIL-",
             "poland, brazil, POLAND-BRAZIL",
     })
-    void getsKey(String hometeam, String awayTeam, String expectedKey) {
-        assertEquals(expectedKey, MatchUtils.getKey(hometeam, awayTeam));
+    void getsKey(String homeTeam, String awayTeam, String expectedKey) {
+        assertEquals(expectedKey, MatchUtils.getKey(homeTeam, awayTeam));
     }
 
 }
