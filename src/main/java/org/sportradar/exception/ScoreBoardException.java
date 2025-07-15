@@ -1,4 +1,4 @@
-package org.sportradar.exaception;
+package org.sportradar.exception;
 
 public class ScoreBoardException extends RuntimeException {
 

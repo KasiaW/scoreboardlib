@@ -7,7 +7,7 @@ public class Match {
     private final String awayTeam;
     private int homeScore;
     private int awayScore;
-    private ZonedDateTime createdDate;
+    private final ZonedDateTime createdDate;
 
     public Match(String homeTeam, String awayTeam) {
         this.homeTeam = homeTeam;
@@ -38,14 +38,13 @@ public class Match {
 
     @Override
     public synchronized String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(homeTeam);
-        sb.append(" ");
-        sb.append(homeScore);
-        sb.append(" - ");
-        sb.append(awayTeam);
-        sb.append(" ");
-        sb.append(awayScore);
-        return sb.toString();
+        String sb = homeTeam +
+                " " +
+                homeScore +
+                " - " +
+                awayTeam +
+                " " +
+                awayScore;
+        return sb;
     }
 }

@@ -2,7 +2,7 @@ package org.sportradar.core;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.sportradar.exaception.ScoreBoardException;
+import org.sportradar.exception.ScoreBoardException;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class ScoreBoardTest {
     }
 
     @Test
-    void returnsEmptyListWhenNoExistingMatches() {
+    void getAllReturnsEmptyListWhenNoMatches() {
         var result = scoreBoard.getAll();
         assertTrue(result.isEmpty());
     }
