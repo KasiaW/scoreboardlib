@@ -1,7 +1,8 @@
-package org.sportradar;
+package org.sportradar.core;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.sportradar.exaception.ScoreBoardException;
 
 import java.util.List;
 
@@ -33,31 +34,40 @@ public class ScoreBoardTest {
 
     @Test
     void startsMatch() {
-        assertTrue(scoreBoard.startMatch("Brazil", "Poland"));
+        var result = scoreBoard.startMatch("Brazil", "Poland");
+
+        assertTrue(result);
         assertEquals(1, scoreBoard.getAll().size());
     }
 
     @Test
-    void returnFalseWhenStartsTheSameMatch() {
+    void startMatchReturnsFalseWhenMatchAlreadyExist() {
         scoreBoard.startMatch("Brazil", "Poland");
 
-        assertFalse(scoreBoard.startMatch("Brazil", "Poland"));
+        var result = scoreBoard.startMatch("Brazil", "Poland");
+
+        assertFalse(result);
         assertEquals(1, scoreBoard.getAll().size());
     }
 
     @Test
-    void removesMatchAfterStopIt() {
-        scoreBoard.startMatch("Brazil", "Poland");
-
-        scoreBoard.stopMatch("Brazil", "Poland");
-
-        var result = scoreBoard.getAll();
-        assertTrue(result.isEmpty());
+    void startMatchThrowsExceptionWhenTeamNameIsEmpty() {
+        assertThrows(ScoreBoardException.class, () -> scoreBoard.startMatch("Brazil", ""));
     }
 
     @Test
-    void doesNothingWhenRemoveNonExistingMatch() {
-        assertDoesNotThrow(() -> scoreBoard.stopMatch("Brazil", "Poland"));
+    void stopsMatch() {
+        scoreBoard.startMatch("Brazil", "Poland");
+
+        var result = scoreBoard.stopMatch("Brazil", "Poland");
+
+        assertTrue(result);
+        assertTrue(scoreBoard.getAll().isEmpty());
+    }
+
+    @Test
+    void stopMatchReturnsFalseWhenMatchDoesntExist() {
+        assertFalse(scoreBoard.stopMatch("Brazil", "Poland"));
     }
 
     @Test
@@ -68,6 +78,17 @@ public class ScoreBoardTest {
         var result = scoreBoard.updateScores("Brazil", "Poland", 3, 2);
         assertEquals(3, result.getHomeScore());
         assertEquals(2, result.getAwayScore());
+    }
+
+    @Test
+    void updatesScoreThrowsExceptionWhenMatchDoesntExist() {
+        assertThrows(ScoreBoardException.class, () -> scoreBoard.updateScores("Brazil", "Poland", 3, 2));
+    }
+
+    @Test
+    void updatesScoreThrowsExceptionWhenScoreIsInvalid() {
+        scoreBoard.startMatch("Brazil", "Poland");
+        assertThrows(IllegalArgumentException.class, () -> scoreBoard.updateScores("Brazil", "Poland", -3, 2));
     }
 
     @Test
@@ -91,5 +112,4 @@ public class ScoreBoardTest {
     void getSummaryReturnsEmptyListWhenNoMatches() {
         assertTrue(scoreBoard.getSummary().isEmpty());
     }
-
 }

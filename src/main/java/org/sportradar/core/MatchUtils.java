@@ -1,8 +1,6 @@
-package org.sportradar;
+package org.sportradar.core;
 
 import jakarta.annotation.Nonnull;
-
-import java.util.Locale;
 
 public final class MatchUtils {
 

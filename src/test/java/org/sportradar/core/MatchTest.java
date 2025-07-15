@@ -1,4 +1,4 @@
-package org.sportradar;
+package org.sportradar.core;
 
 import org.junit.jupiter.api.Test;
 

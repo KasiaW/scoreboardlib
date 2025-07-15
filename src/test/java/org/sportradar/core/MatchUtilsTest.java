@@ -1,6 +1,5 @@
-package org.sportradar;
+package org.sportradar.core;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
